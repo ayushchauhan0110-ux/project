@@ -1,0 +1,320 @@
+/* ===================== GLOBAL / RESET ===================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+   /* font-family: 'Poppins', sans-serif;*/
+    font-family: ui-sans-serif, system-ui, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
+  }
+
+
+  body {
+    background: #000;             /* Site base stays dark */
+    color: #fff;
+    overflow-x: hidden;
+  }
+  
+  /* ===================== TOP BAR (fixed) ===================== */
+  .navbar {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%;
+    padding: 15px 50px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(10px);
+    z-index: 1000;
+    margin-bottom: 50px;
+  }
+  .logo {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #db2777;
+    display: flex;
+  }
+  .menu a {
+    margin-left: 20px;
+    color: #fff;
+    text-decoration: none;
+    font-weight: 500;
+    transition: 0.3s;
+  }
+  .menu a:hover { color: #ff6600; text-decoration: underline; text-underline-offset: 7px; }
+  
+  /* ===================== GLOWING DIVIDER (fixed) ===================== */
+  .glow-line {
+    position: fixed;
+    top: 55px; left: 0;
+    width: 100%;
+    height: 4px;
+    background: radial-gradient(circle at center,
+                rgba(0, 200, 255, 0.9) 0%,
+                rgba(0, 200, 255, 0.5) 30%,
+                transparent 80%);
+    animation: glowPulse 3s infinite alternate;
+    z-index: 999;
+  }
+  @keyframes glowPulse {
+    from { opacity: 0.6; transform: scaleX(0.95); }
+    to   { opacity: 1;   transform: scaleX(1); }
+  }
+  
+  /* ===================== HERO: VIDEO + AUTH BOX ===================== */
+  .hero-section {
+    margin-top: 80px;             /* below navbar + glow line */
+    position: relative;
+    width: 100%;
+    height: 100vh;                /* full screen hero */
+    overflow: hidden;
+  }
+  .hero-video {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;            /* cover screen nicely */
+    pointer-events: none;         /* prevent tap/pausing */
+    z-index: -1;
+  }
+  
+  /* Login/Register card attached to hero/video, aligned right */
+  .login-container {
+    position: absolute;
+    right: 5%;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 100%;
+    max-width: 380px;
+    background: rgba(255, 255, 255, 0.08);
+    border-radius: 20px;
+    padding: 30px;
+    backdrop-filter: blur(15px);
+    box-shadow: 0 0 16px rgba(0,170,255,0.4);
+  }
+  #formTitle {
+    text-align: center;
+    margin-bottom: 18px;
+    font-size: 1.6rem;
+    font-weight: 600;
+    background: linear-gradient(45deg, #00aaff, #ff6600);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .form { display: none; }
+  .form.active { display: block; }
+  
+  .input-group { margin-bottom: 16px; }
+  .input-group label { display: block; font-size: 14px; margin-bottom: 8px; }
+  .input-group input {
+    width: 100%;
+    padding: 12px 14px;
+    border: none;
+    outline: none;
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.18);
+    color: #fff;
+    font-size: 15px;
+  }
+  .btn {
+    width: 100%;
+    padding: 13px;
+    border: none;
+    border-radius: 10px;
+    background: linear-gradient(45deg, #00aaff, #ff6600);
+    color: #fff;
+    font-weight: 700;
+    cursor: pointer;
+    transition: 0.25s;
+  }
+  .btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 0 18px rgba(0,170,255,0.7);
+  }
+  
+  /* Hide native video controls just in case (defensive) */
+  video::-webkit-media-controls { display: none !important; }
+  video::-moz-media-controls { display: none !important; }
+  
+  /* ===================== BLACK GAP ===================== */
+  .gap-section {
+    height: 200px;
+    background: #000;
+  }
+  
+  /* ===================== OUR PROJECTS ===================== */
+  /* Section takes full width but content is explicitly left-aligned */
+  .projects-section {
+    background: #000;
+    padding: 50px 20px 60px;
+  }
+  
+  /*
+  .projects-title {
+    font-size: 2rem;
+    color: #00aaff;
+    margin-bottom: 20px;
+    text-align: left;             /* left-aligned heading 
+    padding-left: 5px;
+  }
+  */
+
+  /* Left-aligned horizontal scroller (no arrows, no scrollbar UI) */
+  .projects-container {
+    display: flex;
+    justify-content: flex-start;  /* anchor content to the left */
+    align-items: stretch;
+    gap: 18px;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    padding: 8px 4px 8px 4px;
+    scrollbar-width: none;        /* Firefox hide */
+  }
+  .projects-container::-webkit-scrollbar { display: none; } /* Chrome hide */
+  
+  .project-card {
+    flex: 0 0 auto;
+    width: 200px;
+    height: 360px;                /* vertical video frame */
+    background: #111;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 0 15px rgba(0,0,0,0.6);
+  }
+  .project-card video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    pointer-events: none;         /* avoid pause on tap/click */
+  }
+  
+  /* Smaller "Show All" tile at the end */
+  .show-all {
+    flex: 0 0 auto;
+    width: 140px;
+    height: 180px;
+    border: none;
+    border-radius: 30px;
+    background: rgba(255,255,255,0.08);
+    backdrop-filter: blur(8px);
+    color: #fff;
+    font-weight: 700;
+    font-size: 15px;
+    cursor: pointer;
+    transition: 0.25s;
+  }
+  .show-all:hover {
+    background: rgba(0,170,255,0.22);
+    box-shadow: 0 0 15px rgba(0,170,255,0.7);
+  }
+  
+  /* ===================== CONTACT US (WHITE ONLY HERE) ===================== */
+  .contact-section {
+    background: #fff;             /* white bg only here */
+    color: #000;
+    padding: 60px 20px 70px;
+    text-align: center;
+  }
+  .contact-section h2 {
+    font-size: 2rem;
+    margin-bottom: 14px;
+  }
+  .contact-info {
+    max-width: 700px;
+    margin: 0 auto 18px;
+    line-height: 1.6;
+  }
+  .contact-form {
+    max-width: 480px;
+    margin: 0 auto;
+    display: grid;
+    gap: 10px;
+  }
+  .contact-form input,
+  .contact-form textarea {
+    padding: 12px 14px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    outline: none;
+  }
+  .contact-btn {
+    background: #111;
+    color: #fff;
+    
+  }
+
+  .box-container{
+    max-width: 1300px;
+    margin: 0 auto;
+    margin-bottom: 8vw;
+  }
+  .box {
+    display: flex;
+    
+    
+  }
+
+  .Two-card{
+    display: flex;
+    
+   
+  }
+  
+  .card {
+    background: #111;
+    border: 2px solid rgba(255, 215, 0, 0.4);
+    border-radius: 15px;
+    padding: 25px;
+    width: 450px;
+    height: 250px;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 10px rgba(255, 215, 0, 0.2);
+    display: inline-block;
+    margin-right: 20px;
+    margin-bottom: 30px; 
+  }
+
+.card-4{
+  width: 910px;
+  margin-top: 0px;
+  border-radius: 15px;
+}
+
+.card-5{
+  width: 450px;
+  border-radius: 15px;
+}
+  
+  .card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 0 20px rgba(255, 215, 0, 0.6);
+    border-color: gold;
+  }
+  
+  .card h2 {
+    margin-bottom: 15px;
+    font-size: 20px;
+    color: gold;
+  }
+  
+  .card ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .card ul li {
+    margin-bottom: 10px;
+    padding-left: 20px;
+    position: relative;
+  }
+  
+  .card ul li::before {
+    content: "✦";
+    position: absolute;
+    left: 0;
+    color: gold;
+  }
+
+  
